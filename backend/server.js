@@ -8,7 +8,12 @@ const app = express()
 const port = 5000
 
 app.use(express.json()); // middleware to parse json
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin:["https://ggnotebook.vercel.app/"],
+  methods: ["POST","GET","DELETE","PUT"],
+  credentials: true
+}));
 
 // Available Routes 
 // app.use('/api/auth', require('./routes/auth'))
