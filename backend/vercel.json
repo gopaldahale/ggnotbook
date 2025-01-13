@@ -1,31 +1,42 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "ggnoteook/package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "ggnoteook/build"
-        }
-      },
-      {
-        "src": "backend/api/*.js",
-        "use": "@vercel/node"
+  "version": 2,
+  "builds": [
+    {
+      "src": "ggnoteook/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "ggnoteook/build"
       }
-    ],
-    "routes": [
-        {
-          "src": "/api/auth/(.*)",
-          "dest": "/backend/api/auth.js"
-        },
-        {
-          "src": "/api/notes/(.*)",
-          "dest": "/backend/api/notes.js"
-        },
-        {
-          "src": "/(.*)",
-          "dest": "/ggnotebook/build/$1"
-        }
-      ]
-  }
-  
+    },
+    {
+      "src": "backend/api/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/auth/(.*)",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://ggnotebook.vercel.app",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      },
+      "dest": "/backend/api/auth.js"
+    },
+    {
+      "src": "/api/notes/(.*)",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://ggnotebook.vercel.app",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      },
+      "dest": "/backend/api/notes.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/ggnotebook/build/$1"
+    }
+  ]
+}
