@@ -17,7 +17,7 @@ const Signup = () => {
     }
     // const {fullname, email, password } = credentials;
     // const response = await fetch('http://localhost:5000/api/auth/createuser', {
-    const response = await fetch('https://vercel.com/gopal-dahales-projects/ggnotebook', {
+    const response = await fetch('https://ggnotbook-backend.vercel.app/api/auth/createuser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
