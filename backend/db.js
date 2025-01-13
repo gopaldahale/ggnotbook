@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
  
 
-console.log('MongoDB URI from env:', process.env.DB_URI);  // Add this log
+// console.log('MongoDB URI from env:', process.env.DB_URI);  // Add this log
 
 const DB_URI = process.env.DB_URI;
 
