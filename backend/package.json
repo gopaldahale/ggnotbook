@@ -2,10 +2,10 @@
   "name": "ggnotebook-backend",
   "version": "1.0.0",
   "description": "ggnotebook - Your Cloud Notebook",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
