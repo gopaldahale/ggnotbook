@@ -3,24 +3,23 @@ const cors = require('cors');
 const connectToMongo = require('./db');
 connectToMongo();  // Call the function to connect to MongoDB'
 
-const app = express()
-// const port = 5000
-
-// app.use(cors());
 app.use(cors({
   origin: 'https://ggnotebook.vercel.app',  
   methods: ["POST", "GET", "DELETE", "PUT", "OPTIONS"],   
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,   
 }));
+const app = express()
+const port = 5000
 
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'https://ggnotebook.vercel.app');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.sendStatus(204);
-});
+
+// app.options('*', (req, res) => {
+//   res.header('Access-Control-Allow-Origin', 'https://ggnotebook.vercel.app');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   res.sendStatus(204);
+// });
 
 app.use(express.json()); // middleware to parse json
 
@@ -32,8 +31,8 @@ app.use('/api/notes', require('./routes/notes'))
 
 
 
-// app.listen(port, () => {
-//   console.log(`ggNotebook Cloud Backend listening on port ${port}`)
-// })
+app.listen(port, () => {
+  console.log(`ggNotebook Cloud Backend listening on port ${port}`)
+})
 
-module.exports = app; 
+// module.exports = app; 

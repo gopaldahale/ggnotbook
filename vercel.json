@@ -1,5 +1,16 @@
 {
   "version": 2,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://ggnotebook.vercel.app"
+        }
+      ]
+    }
+  ],
   "builds": [
     {
       "src": "ggnoteook/package.json",
@@ -16,15 +27,15 @@
   "routes": [
     {
       "src": "/api/auth/(.*)",
-      "dest": "/backend/api/auth.js"
+      "dest": "/backend/routes/auth.js"
     },
     {
       "src": "/api/notes/(.*)",
-      "dest": "/backend/api/notes.js"
+      "dest": "/backend/routes/notes.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/ggnoteook/build/$1"
+      "dest": "/ggnotebook/build/$1"
     }
   ]
 }
