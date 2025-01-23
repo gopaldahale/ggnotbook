@@ -2,6 +2,14 @@
   "version": 2,
   "routes": [
     {
+      "src": "/auth/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/notes/(.*)",
+      "dest": "server.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "server.js"
     }
