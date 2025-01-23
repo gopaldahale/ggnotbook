@@ -20,8 +20,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Routes
-app.use('/api/auth', require('./api/auth'));
-app.use('/api/notes', require('./api/notes'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/notes', require('./routes/notes'));
 
 // Root Route
 app.get('/', (req, res) => {
