@@ -1,6 +1,5 @@
 import NoteContext from "./noteContext";
 import { useState } from "react";
-require('dotenv').config();
 
 const NoteState = (props) => {
     // const host = "http://localhost:5000";
