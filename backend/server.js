@@ -12,7 +12,7 @@ app.use(express.json());
 
 // CORS Options
 const corsOptions = {
-  origin: ['https://ggnotebook-backend.vercel.app/'],
+  origin: ['https://ggnotebook-frontend.vercel.app'],
   credentials: true, // Correct "Credential" to "credentials"
 };
 app.use(cors(corsOptions));
