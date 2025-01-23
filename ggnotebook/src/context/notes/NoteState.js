@@ -26,8 +26,6 @@ const NoteState = (props) => {
             setNotes(json);
         } catch (error) {
             console.error('Error fetching notes:', error);
-        } finally {
-            console.log('object'); // Set loading to false after fetching
         }
     };
 
