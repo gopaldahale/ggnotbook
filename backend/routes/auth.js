@@ -95,7 +95,7 @@ router.post('/login', [
             }
         }
         // const authToken = jwt.sign(data, JWT_SECRET);
-        const authToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const authToken = jwt.sign(data, JWT_SECRET, { expiresIn: '1h' });
         successMsg = true;
         console.log('user logged in!');
         res.json({ successMsg, authToken });
