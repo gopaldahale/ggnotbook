@@ -4,7 +4,6 @@ import { useState } from "react";
 const NoteState = (props) => {
     // const host = "http://localhost:5000";
     const host = "https://ggnotebook-backend.vercel.app";
-    // const AUTH_TOKEN = process.env.AUTH_TOKEN;
 
     // Get all notes 
     const [notes, setNotes] = useState([]);
@@ -57,7 +56,7 @@ const NoteState = (props) => {
                 headers: {
                     'Content-Type': 'application/json',
                     // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcwNmM2ZmFhNGEwM2IwN2M2MzU3YjQwIn0sImlhdCI6MTcyODU2MjU3N30._8r9a562vPjsdiXBKJTGqwPS8IKj6dTb_vYAxH2udsg' // Get token from localStorage
-                    'auth-token': AUTH_TOKEN,
+                    'auth-token': localStorage.getItem('auth-token'),
                 },
                 body: JSON.stringify({ title, description, tag })
             });
