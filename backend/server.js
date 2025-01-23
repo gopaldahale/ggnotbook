@@ -14,14 +14,14 @@ app.use(morgan('dev'));
 
 // CORS Options
 const corsOptions = {
-  origin: ['https://ggnotebook.vercel.app'],
+  origin: ['https://ggnotebook-backend.vercel.app/'],
   credentials: true, // Correct "Credential" to "credentials"
 };
 app.use(cors(corsOptions));
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/notes', require('./routes/notes'));
+// app.use('/api/auth', require('./routes/auth'));
+// app.use('/api/notes', require('./routes/notes'));
 
 // Root Route
 app.get('/', (req, res) => {
