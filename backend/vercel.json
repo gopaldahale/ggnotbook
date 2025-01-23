@@ -1,41 +1,26 @@
 {
   "version": 2,
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1.js"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://ggnotebook.vercel.app"
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
         }
       ]
-    }
-  ],
-  "builds": [
-    {
-      "src": "ggnoteook/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "ggnoteook/build"
-      }
-    },
-    {
-      "src": "backend/api/*.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/auth/(.*)",
-      "dest": "/backend/routes/auth.js"
-    },
-    {
-      "src": "/api/notes/(.*)",
-      "dest": "/backend/routes/notes.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/ggnotebook/build/$1"
     }
   ]
 }
