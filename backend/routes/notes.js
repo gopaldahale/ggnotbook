@@ -4,6 +4,10 @@ const fetchuser = require('../middleware/fetchuser');
 const Notes = require('../models/NotesSchema');
 const { body, validationResult } = require('express-validator');
 
+router.get('/', (req, res) => {
+    res.send('Notes route is working!');
+  });
+
 // Route 1: Fetch all the notes using: GET "/api/notes/fetchallnotes". Login required
 router.get('/fetchallnotes', fetchuser, async (req, res) => {   
     try {
