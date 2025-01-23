@@ -1,11 +1,12 @@
 import NoteContext from "./noteContext";
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 
 const NoteState = (props) => {
     // const host = "http://localhost:5000";
     const host = "https://ggnotebook-backend.vercel.app";
     const authToken = localStorage.getItem('auth-token'); // Retrieve token from localStorage
-
+    
+    const [notes, setNotes] = useState([]);
     useEffect(() => {
         if (!authToken) {
             console.error('No auth token found. Please log in first.');
