@@ -10,7 +10,6 @@ const NoteState = (props) => {
     useEffect(() => {
         if (!authToken) {
             console.error('No auth token found. Please log in first.');
-            setLoading(false);
             return;
         }
         // Fetch notes once auth token is available
@@ -28,7 +27,7 @@ const NoteState = (props) => {
             } catch (error) {
                 console.error('Error fetching notes:', error);
             } finally {
-                setLoading(false);
+                console.log('hola');
             }
         };
 
