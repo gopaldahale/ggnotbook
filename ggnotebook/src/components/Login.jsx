@@ -31,7 +31,7 @@ const Login = () => {
         
         if(json.successMsg) {
             //save auth token and redirect 
-            localStorage.setItem('auth-token', json.authtoken);
+            localStorage.setItem('auth-token', json.authToken);
             history("/");
             alert('Login successful');
         } else {
