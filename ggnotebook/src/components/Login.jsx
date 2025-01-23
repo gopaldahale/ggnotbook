@@ -25,13 +25,15 @@ const Login = () => {
             // body: JSON.stringify({ email, password })
             credentials: 'include',
         });
+
         const json = await response.json();
         console.log(json);
+        
         if(json.successMsg) {
             //save auth token and redirect 
-            localStorage.setItem('token', json.authtoken);
+            localStorage.setItem('auth-token', json.authtoken);
             history("/");
-
+            alert('Login successful');
         } else {
             alert('Invalid credentials' + json.email);
         }
