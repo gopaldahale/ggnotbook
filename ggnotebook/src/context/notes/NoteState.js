@@ -15,6 +15,7 @@ const NoteState = (props) => {
             headers: {
                 'Content-Type': 'application/json',
                 // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcwNmM2ZmFhNGEwM2IwN2M2MzU3YjQwIn0sImlhdCI6MTcyODkyNzc2Mn0.mdyq7dqwuTfErWkmsIPww1xNImqmhS7Gec3zaaKckYw'
+                // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc4NGVmZDE3Mjg2OTQ2OWNjY2NlY2M5In0sImlhdCI6MTczNzY1MDcxMX0.A73cdeW1FQIAqfDm4eWltRd6HDOmdZWeH9pneIN8mnU'
                 'auth-token': localStorage.getItem('auth-token'),
             },
         });
