@@ -4,6 +4,11 @@ import { useState } from "react";
 const NoteState = (props) => {
     // const host = "http://localhost:5000";
     const host = "https://ggnotebook-backend.vercel.app";
+    const authToken = localStorage.getItem('auth-token'); // Retrieve token from localStorage
+    if (!authToken) {
+        console.error('No auth token found. Please log in first.');
+        return;
+    }
 
     // Get all notes 
     const [notes, setNotes] = useState([]);
@@ -14,7 +19,7 @@ const NoteState = (props) => {
                 'Content-Type': 'application/json',
                 // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcwNmM2ZmFhNGEwM2IwN2M2MzU3YjQwIn0sImlhdCI6MTcyODkyNzc2Mn0.mdyq7dqwuTfErWkmsIPww1xNImqmhS7Gec3zaaKckYw'
                 // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc4NGVmZDE3Mjg2OTQ2OWNjY2NlY2M5In0sImlhdCI6MTczNzY1MDcxMX0.A73cdeW1FQIAqfDm4eWltRd6HDOmdZWeH9pneIN8mnU'
-                'auth-token': localStorage.getItem('auth-token'),
+                'auth-token': authToken,
             },
         });
         const json = await response.json();
@@ -27,7 +32,7 @@ const NoteState = (props) => {
             headers: {
                 'Content-Type': 'application/json',
                 // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcwNmM2ZmFhNGEwM2IwN2M2MzU3YjQwIn0sImlhdCI6MTcyODkyNzc2Mn0.mdyq7dqwuTfErWkmsIPww1xNImqmhS7Gec3zaaKckYw'
-                'auth-token': localStorage.getItem('auth-token'),
+                'auth-token': authToken,
             },
         });
         const json = await response.json();
@@ -41,7 +46,7 @@ const NoteState = (props) => {
             headers: {
                 'Content-Type': 'application/json',
                 // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcwNmM2ZmFhNGEwM2IwN2M2MzU3YjQwIn0sImlhdCI6MTcyODU2MjU3N30._8r9a562vPjsdiXBKJTGqwPS8IKj6dTb_vYAxH2udsg'
-               'auth-token': localStorage.getItem('auth-token'),
+               'auth-token': authToken,
             },
             body: JSON.stringify({ title, description, tag })
         });
@@ -56,7 +61,7 @@ const NoteState = (props) => {
                 headers: {
                     'Content-Type': 'application/json',
                     // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcwNmM2ZmFhNGEwM2IwN2M2MzU3YjQwIn0sImlhdCI6MTcyODU2MjU3N30._8r9a562vPjsdiXBKJTGqwPS8IKj6dTb_vYAxH2udsg' // Get token from localStorage
-                    'auth-token': localStorage.getItem('auth-token'),
+                    'auth-token': authToken,
                 },
                 body: JSON.stringify({ title, description, tag })
             });
