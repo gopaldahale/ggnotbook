@@ -7,30 +7,32 @@ const NoteState = (props) => {
     const authToken = localStorage.getItem('auth-token'); // Retrieve token from localStorage
     
     const [notes, setNotes] = useState([]);
-    useEffect(() => {
+    
+     // Function to fetch notes
+     const getNotes = async () => {
         if (!authToken) {
             console.error('No auth token found. Please log in first.');
             return;
         }
-        // Fetch notes once auth token is available
-        const getNotes = async () => {
-            try {
-                const response = await fetch(`${host}/api/notes/fetchallnotes`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'auth-token': authToken,
-                    },
-                });
-                const json = await response.json();
-                setNotes(json);
-            } catch (error) {
-                console.error('Error fetching notes:', error);
-            } finally {
-                console.log('hola');
-            }
-        };
+        try {
+            const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': authToken,
+                },
+            });
+            const json = await response.json();
+            setNotes(json);
+        } catch (error) {
+            console.error('Error fetching notes:', error);
+        } finally {
+            console.log('object'); // Set loading to false after fetching
+        }
+    };
 
+    // Call getNotes when authToken changes
+    useEffect(() => {
         if (authToken) {
             getNotes();
         }
