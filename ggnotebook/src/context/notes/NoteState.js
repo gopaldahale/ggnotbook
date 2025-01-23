@@ -1,5 +1,5 @@
 import NoteContext from "./noteContext";
-import { useState, useEffect  } from "react";
+import { useState  } from "react";
 
 const NoteState = (props) => {
     // const host = "http://localhost:5000";
@@ -34,11 +34,11 @@ const NoteState = (props) => {
     };
 
     // Call getNotes only if authToken is available
-    useEffect(() => {
-        if (authToken) {
-            getNotes(); // Fetch notes only once when authToken is set
-        }
-    }, [authToken]);
+    // useEffect(() => {
+    //     if (authToken) {
+    //         getNotes(); // Fetch notes only once when authToken is set
+    //     }
+    // }, [authToken]);
 
     // if (!authToken) {
     //     console.error('No auth token found. Please log in first.');
