@@ -70,3 +70,10 @@
     padding: 0px 100px;
   }
 }
+
+body[data-zoom="110%"] {
+  background: red!important;
+}
+body[data-zoom="120%"] {
+  background: yellow!important;
+}

@@ -13,7 +13,13 @@ connectToMongo();  // Call the function to connect to MongoDB'
   const port = 5000 
   
   app.use(express.json()); // middleware to parse json
-  app.use(cors());
+
+  const corsOptions = {
+    origin:['https://ggnotebook.vercel.app'],
+    Credential:true,
+  }
+  
+  app.use(cors(corsOptions));
   
 // Available Routes 
 app.use('/api/auth', require('./routes/auth'))
