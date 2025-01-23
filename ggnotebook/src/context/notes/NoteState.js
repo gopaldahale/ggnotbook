@@ -5,32 +5,64 @@ const NoteState = (props) => {
     // const host = "http://localhost:5000";
     const host = "https://ggnotebook-backend.vercel.app";
     const authToken = localStorage.getItem('auth-token'); // Retrieve token from localStorage
-    if (!authToken) {
-        console.error('No auth token found. Please log in first.');
-        return;
-    }
 
-    // Get all notes 
-    const [notes, setNotes] = useState([]);
-    const getNotes = async () => {
-        try{
-            const response = await fetch(`${host}/api/notes/fetchallnotes`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcwNmM2ZmFhNGEwM2IwN2M2MzU3YjQwIn0sImlhdCI6MTcyODkyNzc2Mn0.mdyq7dqwuTfErWkmsIPww1xNImqmhS7Gec3zaaKckYw'
-                    // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc4NGVmZDE3Mjg2OTQ2OWNjY2NlY2M5In0sImlhdCI6MTczNzY1MDcxMX0.A73cdeW1FQIAqfDm4eWltRd6HDOmdZWeH9pneIN8mnU'
-                    'auth-token': authToken,
-                },
-            });
-            const json = await response.json();
-            setNotes(json);
+    useEffect(() => {
+        if (!authToken) {
+            console.error('No auth token found. Please log in first.');
+            setLoading(false);
+            return;
         }
-        catch (error) {
-            console.error('Error fetching notes:', error);
+        // Fetch notes once auth token is available
+        const getNotes = async () => {
+            try {
+                const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': authToken,
+                    },
+                });
+                const json = await response.json();
+                setNotes(json);
+            } catch (error) {
+                console.error('Error fetching notes:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (authToken) {
+            getNotes();
         }
-        
-    }   
+    }, [authToken]);
+
+    // if (!authToken) {
+    //     console.error('No auth token found. Please log in first.');
+    //     return;
+    // }
+
+    // // Get all notes 
+    // const [notes, setNotes] = useState([]);
+    // const getNotes = async () => {
+    //     try{
+    //         const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcwNmM2ZmFhNGEwM2IwN2M2MzU3YjQwIn0sImlhdCI6MTcyODkyNzc2Mn0.mdyq7dqwuTfErWkmsIPww1xNImqmhS7Gec3zaaKckYw'
+    //                 // 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc4NGVmZDE3Mjg2OTQ2OWNjY2NlY2M5In0sImlhdCI6MTczNzY1MDcxMX0.A73cdeW1FQIAqfDm4eWltRd6HDOmdZWeH9pneIN8mnU'
+    //                 'auth-token': authToken,
+    //             },
+    //         });
+    //         const json = await response.json();
+    //         setNotes(json);
+    //     }
+    //     catch (error) {
+    //         console.error('Error fetching notes:', error);
+    //     }
+
+    // }   
+
     // Delete note 
     const deleteNote = async (id) => {
         const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
