@@ -14,10 +14,11 @@ app.use(express.json());
 const corsOptions = {
   origin: ['https://ggnotebook-frontend.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'], // If you are using headers like Authorization
+  allowedHeaders: ['Content-Type', 'Authorization'], 
   credentials: true,
 };
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));

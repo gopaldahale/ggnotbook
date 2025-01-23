@@ -17,7 +17,7 @@ if (!JWT_SECRET) {
 
 router.get('/', (req, res) => {
     res.send('Auth route is working!');
-  });
+});
 
 // Route 1: Create a User using: POST "/api/auth/createuser" . No login require
 router.post('/createuser', [
@@ -96,6 +96,7 @@ router.post('/login', [
         }
         const authToken = jwt.sign(data, JWT_SECRET);
         successMsg = true;
+        console.log('user logged in!');
         res.json({ successMsg, authToken });
     } catch (error) {
         console.log(error);
