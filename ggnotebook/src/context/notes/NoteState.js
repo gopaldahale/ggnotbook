@@ -7,11 +7,13 @@ const NoteState = (props) => {
     const authToken = localStorage.getItem('auth-token'); // Retrieve token from localStorage
     
     const [notes, setNotes] = useState([]);
-    
-     // Function to fetch notes
-     const getNotes = async () => {
+    const [loading, setLoading] = useState(true); // To handle loading state
+
+    // Function to fetch notes
+    const getNotes = async () => {
         if (!authToken) {
             console.error('No auth token found. Please log in first.');
+            setLoading(false); // Set loading to false if no auth token
             return;
         }
         try {
@@ -23,16 +25,18 @@ const NoteState = (props) => {
                 },
             });
             const json = await response.json();
-            setNotes(json);
+            setNotes(json); // Set the fetched notes in the state
         } catch (error) {
             console.error('Error fetching notes:', error);
+        } finally {
+            setLoading(false); // Set loading to false after the fetch is done
         }
     };
 
-    // Call getNotes when authToken changes
+    // Call getNotes only if authToken is available
     useEffect(() => {
         if (authToken) {
-            getNotes();
+            getNotes(); // Fetch notes only once when authToken is set
         }
     }, [authToken]);
 
@@ -113,7 +117,7 @@ const NoteState = (props) => {
     
 
     return (
-        <NoteContext.Provider value={{ notes, deleteNote, updateNote, addNote, getNotes }} >
+        <NoteContext.Provider value={{ notes, deleteNote, updateNote, addNote, getNotes, loading }} >
             {props.children}
         </NoteContext.Provider >
     )
