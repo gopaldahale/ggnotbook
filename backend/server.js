@@ -1,37 +1,38 @@
-const express = require('express')
+const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const connectToMongo = require('./db');
-connectToMongo();   
- 
-  const app = express()
-  const port = 5000 
-  
-  app.use(express.json());  
-  app.use(morgan('dev'));
 
-  const corsOptions = {
-    origin:['https://ggnotebook.vercel.app'],
-    Credential:true,
-  }
+// Connect to MongoDB
+connectToMongo();
 
-  app.use(cors(corsOptions));
-  
-// Available Routes 
-// app.use('/api/auth', require('./routes/auth'))
-// app.use('/api/notes', require('./routes/notes')) 
+const app = express();
 
+// Middleware
+app.use(express.json());
+app.use(morgan('dev'));
+
+// CORS Options
+const corsOptions = {
+  origin: ['https://ggnotebook.vercel.app'],
+  credentials: true, // Correct "Credential" to "credentials"
+};
+app.use(cors(corsOptions));
+
+// Routes
+app.use('/api/auth', require('./api/auth'));
+app.use('/api/notes', require('./api/notes'));
+
+// Root Route
 app.get('/', (req, res) => {
   res.send('Welcome to the main API!');
 });
 
+// Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
 
-// app.listen(port, () => {
-//   console.log(`ggNotebook Cloud Backend listening on port ${port}`)
-// })
-
-module.exports = app; 
+// Export the app for Vercel
+module.exports = app;
