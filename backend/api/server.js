@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const connectToMongo = require('./db');
+const connectToMongo = require('../db');
 
 // Connect to MongoDB
 connectToMongo();
@@ -20,8 +20,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/notes', require('./routes/notes'));
+app.use('/api/auth', require('../routes/auth'));
+app.use('/api/notes', require('../routes/notes'));
 
 // Root Route
 app.get('/', (req, res) => {
